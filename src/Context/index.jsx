@@ -1,18 +1,55 @@
 import { createContext, useEffect, useState } from "react";
 
-// creamos nuestro contexto
 export const ShoppingCartContext = createContext();
 
-// necesitamos crear un provider
+// vamos a inicializar esto en el context
+export const initializeLocalStorage = () => {
+    // tomamos las variables del localStorage
+    const accountInLocalStorage = localStorage.getItem("account");
+    const signOutInLocalStorage = localStorage.getItem("sign-out");
+
+    let parsedAccount;
+    let parsedSignOut;
+
+    // si no hay nada en el localStorage para account
+    if(!accountInLocalStorage){
+        localStorage.setItem("account", JSON.stringify({}))
+        parsedAccount = {}
+        console.log("parsedAccount", parsedAccount)
+    } else {
+        // en caso contrario
+        parsedAccount = JSON.stringify(accountInLocalStorage)
+        console.log("parsedAccount", parsedAccount)
+    }
+    
+    // si no hay nada en localStorage para sing-out
+    if(!signOutInLocalStorage){
+        localStorage.setItem("sign-out", JSON.stringify(false))
+        parsedSignOut = false
+        console.log("parsedSignOut", parsedSignOut)
+    } else {
+        // en caso contrario
+        parsedSignOut = JSON.stringify(signOutInLocalStorage)
+        console.log("parsedSignOut", parsedSignOut)
+    }
+}
+
+initializeLocalStorage()
+
 export const ShoppingCartProvider = ({children}) => {
-    // ProductDetail - increment quantity
+    // My account
+    const [account, setAccount] = useState({})
+    
+    
+    // Sign Out
+    const [signOut, setSignOut] = useState(false)
+    console.log("signOut", signOut)
+
+    // contador del carrito
     const [count, setCount] = useState(0);
 
-    // ProductDetail - show or hide
-    // creamos un estado para saber si productDetail esta abierto o cerrado
     const [isProductDetailOpen, setIsProductDetailOpen] = useState(false);
     
-    // creamos 2 funciones, una para abrir y otra para cerrar el productDetail
     const openProductDetail = () => setIsProductDetailOpen(true);
     const closeProductDetail = () => setIsProductDetailOpen(false);
     
@@ -28,7 +65,6 @@ export const ShoppingCartProvider = ({children}) => {
 
 
     // CartProducts - add products to cart
-    // creamos el estado para almacenar la informacion de una orden especifica
     const [cartProducts, setCartProducts] = useState([]); 
 
 
@@ -41,7 +77,6 @@ export const ShoppingCartProvider = ({children}) => {
 
 
     // Get filteredItems
-    // este estado va a coresponder a los items que sean filtreados dependiendo de lo que escribamos en el input
     const [filteredItems, setFilteredItems] = useState(null);
 
 
@@ -71,22 +106,18 @@ export const ShoppingCartProvider = ({children}) => {
 
     // creamos otra funcion para filtrar dependiendo de de si es title o category
     const filterBy = (searchType, items, searchByTitle, searchByCategory) => {
-        // si filtran solo por titulo
         if(searchType === 'BY_TITLE'){
             return filteredItemsByTitle(items, searchByTitle)
         }
 
-        // si filtran solo pr categoria
         if(searchType === 'BY_CATEGORY'){
             return filteredItemsByCategory(items, searchByCategory)
         }
 
-        // si filtran por titulo y categoria
         if(searchType === 'BY_TITLE_AND_CATEGORY'){
             return filteredItemsByCategory(items, searchByCategory).filter((item) => item.title.toLowerCase().includes(searchByTitle).toLowerCase())
         }
 
-        // si no filtran por ninguno
         if(!searchType){
             return items;
         }
@@ -107,41 +138,37 @@ export const ShoppingCartProvider = ({children}) => {
     }, [items, searchByTitle, searchByCategory]);
 
     return (
-        // y va a funcionar como un wraper para todos los componentes que esten dentro de el, para proveer esa fuente de verdad a todos
         <ShoppingCartContext.Provider value= {{
             count,
             setCount,
-            // pasamos el estado y las funciones al provider para poder usarlos globalmente
             isProductDetailOpen,
             openProductDetail,
             closeProductDetail,
-            // pasamos la inforrmacion del producto
             infoProductToShow,
             setInfoProductToShow,
-            // pasamos la informacion del carrito
             cartProducts,
             setCartProducts,
-            // pasamos la informacion del checkoutSideMenu
             isCheckoutSideMenuOpen,
             openCheckoutSideMenu,
             closeCheckoutSideMenu,
-            // pasamos la informacion de la orden
             order,
             setOrder,
-            // Pasamos la informacion de los productos que vienen de la API
             items,
             setItems,
-            // Pasamos la informacion del searchByTitle
             searchByTitle,
             setSearchByTitle,
-            // Pasamos la informacion de los items filtrados
             filteredItems,
             setFilteredItems,
-            // pasamos la info de searchByCategory
             searchByCategory,
-            setSearchByCategory
+            setSearchByCategory,
+            // pasamos la informacion del signout y account
+            signOut,
+            setSignOut,
+            account,
+            setAccount
         }}>
             {children}
         </ShoppingCartContext.Provider>
     )
 }
+
