@@ -15,22 +15,18 @@ export const initializeLocalStorage = () => {
     if(!accountInLocalStorage){
         localStorage.setItem("account", JSON.stringify({}))
         parsedAccount = {}
-        console.log("parsedAccount", parsedAccount)
     } else {
         // en caso contrario
         parsedAccount = JSON.stringify(accountInLocalStorage)
-        console.log("parsedAccount", parsedAccount)
     }
     
     // si no hay nada en localStorage para sing-out
     if(!signOutInLocalStorage){
         localStorage.setItem("sign-out", JSON.stringify(false))
         parsedSignOut = false
-        console.log("parsedSignOut", parsedSignOut)
     } else {
         // en caso contrario
         parsedSignOut = JSON.stringify(signOutInLocalStorage)
-        console.log("parsedSignOut", parsedSignOut)
     }
 }
 
@@ -43,8 +39,8 @@ export const ShoppingCartProvider = ({children}) => {
     
     // Sign Out
     const [signOut, setSignOut] = useState(false)
-    console.log("signOut", signOut)
 
+    
     // contador del carrito
     const [count, setCount] = useState(0);
 

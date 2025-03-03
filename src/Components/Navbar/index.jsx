@@ -14,9 +14,9 @@ const Navbar = () => {
     const signOut = localStorage.getItem("sign-out")
     console.log("Navbar.signOut", signOut)
     
-    const parsedSignOut = JSON.stringify(signOut)
-    console.log("Navbar.parsedSignOut", parsedSignOut)
-    const isUserSignOut = context.signOut || parsedSignOut
+    // const parsedSignOut = JSON.stringify(signOut)
+    // console.log("Navbar.parsedSignOut", parsedSignOut)
+    const isUserSignOut = context.signOut 
 
     // creamos la funcion para detectar el signOut
     const handleSignOut = () => {
@@ -30,13 +30,14 @@ const Navbar = () => {
     // creamos una funcion renderView para renderizar dependiendo de
     const renderView = () => {
         if (isUserSignOut) {
+            console.log("isUserSignOut 1", isUserSignOut)
             return (
                 <li>
                     <NavLink
                         to="/sign-in"
                         className={({ isActive }) => isActive ? activeStyle : undefined}
                         onClick={() => handleSignOut()}
-                    >
+                        >
                         Sign out
                     </NavLink>
                 </li>
@@ -44,6 +45,7 @@ const Navbar = () => {
         } else {
             return (
                 <>
+                {console.log("isUserSignOut 2", isUserSignOut)}
                     <li className='text-black/60'>
                         jorge@mail.com
                     </li>
