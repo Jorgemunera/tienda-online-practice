@@ -35,10 +35,12 @@ initializeLocalStorage()
 export const ShoppingCartProvider = ({children}) => {
     // My account
     const [account, setAccount] = useState({})
+    console.log("account", account)
     
     
     // Sign Out
     const [signOut, setSignOut] = useState(false)
+    console.log("signOut", signOut)
 
     
     // contador del carrito

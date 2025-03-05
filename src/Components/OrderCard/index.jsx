@@ -29,6 +29,7 @@ const OrderCard = (props) => {
                 <p className="text-sm font-light">{title}</p>
             </div>
             <div className="flex items-center gap-2">
+                <p className="text-lg font-medium">$</p>
                 <p className="text-lg font-medium">{price}</p>
                 {
                     renderXmarkIcon

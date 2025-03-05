@@ -4,19 +4,29 @@ import { ShoppingBagIcon } from "@heroicons/react/20/solid";
 
 // traemos nuestro contexto global
 import { ShoppingCartContext } from "../../Context";
+import ShoppingCart from "../ShoppingCart";
 
 const Navbar = () => {
     // usamos el useContest
     const context = useContext(ShoppingCartContext);
-    const activeStyle = "underline underline-offset-4";
+    const activeStyle = `$ 'ss' "underline underline-offset-4"`;
 
     // Sign Out
     const signOut = localStorage.getItem("sign-out")
-    console.log("Navbar.signOut", signOut)
-    
-    // const parsedSignOut = JSON.stringify(signOut)
-    // console.log("Navbar.parsedSignOut", parsedSignOut)
-    const isUserSignOut = context.signOut 
+    const parsedSignOut = JSON.parse(signOut)
+    const isUserSignOut = context.signOut || parsedSignOut
+
+
+    // Account
+    const account = localStorage.getItem("account")
+    const parsedAccount = JSON.parse(account)
+
+    // Has an account
+    const noAccountInLocalStorage = parsedAccount ? Object.keys(parsedAccount).length === 0 : true
+    const noAccountInLocalState = context.account ? Object.keys(context.account).length === 0 : true
+    const hasUserAnAccount = !noAccountInLocalStorage || !noAccountInLocalState
+    console.log("hasUserAnAccount.navbar", hasUserAnAccount)
+
 
     // creamos la funcion para detectar el signOut
     const handleSignOut = () => {
@@ -29,23 +39,9 @@ const Navbar = () => {
 
     // creamos una funcion renderView para renderizar dependiendo de
     const renderView = () => {
-        if (isUserSignOut) {
-            console.log("isUserSignOut 1", isUserSignOut)
-            return (
-                <li>
-                    <NavLink
-                        to="/sign-in"
-                        className={({ isActive }) => isActive ? activeStyle : undefined}
-                        onClick={() => handleSignOut()}
-                        >
-                        Sign out
-                    </NavLink>
-                </li>
-            )
-        } else {
+        if (hasUserAnAccount && !isUserSignOut) {
             return (
                 <>
-                {console.log("isUserSignOut 2", isUserSignOut)}
                     <li className='text-black/60'>
                         jorge@mail.com
                     </li>
@@ -73,6 +69,17 @@ const Navbar = () => {
                     </li>
                 </>
             )
+        } else {
+            return (
+                <li>
+                    <NavLink
+                        to="/sign-in"
+                        className={({ isActive }) => isActive ? activeStyle : undefined}
+                        onClick={() => handleSignOut()}>
+                        Sign in
+                    </NavLink>
+                </li>
+            )
         }
     }
 
@@ -81,7 +88,7 @@ const Navbar = () => {
             <ul className="flex items-center gap-3">
                 <li className="font-bold text-lg">
                     <NavLink
-                        to='/'
+                        to={`${isUserSignOut ? '/sign-in' : '/'}`}
                     >
                         Shopi
                     </NavLink>
@@ -153,7 +160,10 @@ const Navbar = () => {
                 </li>
             </ul>
             <ul className="flex items-center gap-3">
-                    {renderView()}
+                {renderView()}
+                <li className='flex items-center'>
+                    <ShoppingCart/>
+                </li>
             </ul>
         </nav>
     )
