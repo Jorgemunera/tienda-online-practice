@@ -1,6 +1,6 @@
 import { useContext, useState, useRef } from 'react'
 import { ShoppingCartContext } from '../../Context'
-import Layout from '../../Components/Layout'
+import Layout from '../../Components/Layout.jsx'
 
 function MyAccount() {
     // traemos el contexto
