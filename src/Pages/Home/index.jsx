@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import LayoutTemp from '../../Components/LayoutTempTemp';
+import LayoutTemp from '../../Components/LayoutTemp';
 
 import Card from "../../Components/Card";
 import ProductDetail from "../../Components/ProductDetail";
