@@ -1,6 +1,6 @@
 import { useContext, useState, useRef } from 'react'
 import { ShoppingCartContext } from '../../Context'
-import Layout from '../../Components/Layout.jsx'
+import LayoutTemp from '../../Components/LayoutTemp'
 
 function MyAccount() {
     // traemos el contexto
@@ -102,10 +102,10 @@ function MyAccount() {
     const renderView = () => view === 'edit-user-info' ? renderEditUserInfo() : renderUserInfo()
 
     return (
-        <Layout>
+        <LayoutTemp>
             <h1 className="font-medium text-xl text-center mb-6 w-80">My account</h1>
             {renderView()}
-        </Layout>
+        </LayoutTemp>
     )
 }
 

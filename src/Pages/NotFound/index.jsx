@@ -1,11 +1,11 @@
-import Layout from '../../Components/Layout.jsx';
+import LayoutTemp from '../../Components/LayoutTemp/index.jsx';
 
 
 function NotFound() {
     return (
-        <Layout>
+        <LayoutTemp>
             Soy el NotFound
-        </Layout>
+        </LayoutTemp>
     )
 }
 

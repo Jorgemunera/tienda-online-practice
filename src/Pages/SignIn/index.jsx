@@ -1,5 +1,5 @@
 import { Link, Navigate, NavLink } from "react-router-dom";
-import Layout from '../../Components/Layout.jsx';
+import LayoutTemp from '../../Components/LayoutTemp/index.jsx';
 
 import { useContext, useRef, useState } from "react";
 import { ShoppingCartContext } from "../../Context";
@@ -144,10 +144,10 @@ function SignIn() {
     const renderView = () => view === "create-user-info" ? renderCreateUserInfo() : renderLogin();
 
     return (
-        <Layout>
+        <LayoutTemp>
             <h1 className="font-medium text-xl text-center mb-6 w-80">Welcome</h1>
             {renderView()}
-        </Layout>
+        </LayoutTemp>
     )
 }
 

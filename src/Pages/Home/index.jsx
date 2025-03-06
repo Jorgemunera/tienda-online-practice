@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import Layout from '../../Components/Layout.jsx';
+import LayoutTemp from '../../Components/LayoutTempTemp';
 
 import Card from "../../Components/Card";
 import ProductDetail from "../../Components/ProductDetail";
@@ -25,7 +25,7 @@ function Home() {
     }
 
     return (
-        <Layout>
+        <LayoutTemp>
             <div className='flex items-center justify-center relative w-80 mb-4'>
                 <h1 className='font-medium text-xl'>Exclusive Products</h1>
             </div>
@@ -41,7 +41,7 @@ function Home() {
                 }
             </div>
             <ProductDetail/>
-        </Layout>
+        </LayoutTemp>
     )
 }
 

@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { ShoppingCartContext } from "../../Context";
-import Layout from '../../Components/Layout.jsx';
+import LayoutTemp from '../../Components/LayoutTemp/index.jsx';
 
 import OrderCard from "../../Components/OrderCard";
 import { Link } from "react-router-dom";
@@ -19,7 +19,7 @@ function MyOrder() {
     return (
         // tomamos el componente de ordercard que ya tebiamos
 
-        <Layout>
+        <LayoutTemp>
             <div className="flex relative w-80 mb-4 items-center justify-center">
                 <Link to='/my-orders' className="absolute left-0">
                     <ChevronLeftIcon
@@ -45,7 +45,7 @@ function MyOrder() {
                     })
                 }
             </div>
-        </Layout>
+        </LayoutTemp>
     )
 }
 

@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { ShoppingCartContext } from "../../Context";
-import Layout from '../../Components/Layout.jsx';
+import LayoutTemp from '../../Components/LayoutTemp/index.jsx';
 
 import OrdersCard from "../../Components/OrdersCard";
 import { Link } from "react-router-dom";
@@ -10,7 +10,7 @@ function MyOrders() {
     const context = useContext(ShoppingCartContext);
 
     return (
-        <Layout>
+        <LayoutTemp>
             <div className="flex relative w-80 items-center justify-center mb-4">
                 <h1 className='font-medium text-xl'>My Orders</h1>
             </div>
@@ -28,7 +28,7 @@ function MyOrders() {
                     )
                 })
             }
-        </Layout>
+        </LayoutTemp>
     )
 }
 
