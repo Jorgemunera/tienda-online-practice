@@ -1,5 +1,5 @@
 import { Link, Navigate, NavLink } from "react-router-dom";
-import Layout from "../../Components/layout";
+import Layout from "../../Components/Layout";
 import { useContext, useRef, useState } from "react";
 import { ShoppingCartContext } from "../../Context";
 

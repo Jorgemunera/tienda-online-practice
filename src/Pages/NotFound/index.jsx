@@ -1,4 +1,4 @@
-import Layout from "../../Components/layout";
+import Layout from "../../Components/Layout";
 
 function NotFound() {
     return (
