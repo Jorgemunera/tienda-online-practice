@@ -9,7 +9,7 @@ import ShoppingCart from "../ShoppingCart";
 const Navbar = () => {
     // usamos el useContest
     const context = useContext(ShoppingCartContext);
-    const activeStyle = `$ 'ss' "underline underline-offset-4"`;
+    const activeStyle = "underline underline-offset-4";
 
     // Sign Out
     const signOut = localStorage.getItem("sign-out")
